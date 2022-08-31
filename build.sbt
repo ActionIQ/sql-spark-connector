@@ -5,8 +5,8 @@ organization := "com.microsoft.sqlserver.jdbc.spark"
 version := "1.0.0"
 
 scalaVersion := "2.11.12"
-
-val sparkVersion = "2.4.6"
+crossScalaVersions := Seq("2.11.12", "2.12.15")
+val sparkVersion = "2.4.7"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 

@@ -1,9 +1,12 @@
 import com.amazonaws.auth.{AWSCredentialsProviderChain, DefaultAWSCredentialsProviderChain}
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
 
+val pkgOrg = Seq("com", "microsoft", "sqlserver", "jdbc", "spark")
+val pkgName = "spark-mssql-connector"
+
 name := "spark-mssql-connector"
 
-organization := "com.microsoft.sqlserver.jdbc.spark"
+organization := pkgOrg.mkString(".")
 
 version := "1.0.2-aiq1"
 
@@ -27,7 +30,6 @@ libraryDependencies ++= Seq(
 
   //SQLServer JDBC jars
   "com.microsoft.sqlserver" % "mssql-jdbc" % "8.4.1.jre8"
-
 )
 
 scalacOptions := Seq("-unchecked", "-deprecation", "evicted")
@@ -37,7 +39,6 @@ assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeSca
 
 val s3Base: String = "s3://s3-us-east-1.amazonaws.com/aiq-artifacts"
 
-// Loads the credentials from .aws/credentials
 s3CredentialsProvider := { (bucket: String) =>
   new AWSCredentialsProviderChain(
     new ProfileCredentialsProvider("default"),
@@ -45,4 +46,4 @@ s3CredentialsProvider := { (bucket: String) =>
   )
 }
 publishMavenStyle := true
-publishTo := Some("AIQ Snapshots" at s"$s3Base/app-bin/snapshots/com/microsoft/azure/spark-mssql-connector/")
+publishTo := Some("AIQ Snapshots" at s"$s3Base/app-bin/snapshots/${pkgOrg.mkString("/")}/${pkgName}/")

@@ -2,7 +2,7 @@ name := "spark-mssql-connector"
 
 organization := "com.microsoft.sqlserver.jdbc.spark"
 
-version := "1.0.0"
+version := "1.0.2-aiq1"
 
 scalaVersion := "2.11.12"
 crossScalaVersions := Seq("2.11.12", "2.12.15")

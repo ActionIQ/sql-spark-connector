@@ -1,17 +1,15 @@
 import com.amazonaws.auth.{AWSCredentialsProviderChain, DefaultAWSCredentialsProviderChain}
 import com.amazonaws.auth.profile.ProfileCredentialsProvider
 
-val pkgOrg = Seq("com", "microsoft", "sqlserver", "jdbc", "spark")
-val pkgName = "spark-mssql-connector"
-val sparkVersion = "2.4.7"
+name := "spark-mssql-connector"
 
-name := pkgName
-
-organization := pkgOrg.mkString(".")
+organization := "com.microsoft.sqlserver.jdbc.spark"
 
 version := "1.0.2-aiq1"
 
 scalaVersion := "2.12.15"
+
+val sparkVersion = "2.4.6"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 

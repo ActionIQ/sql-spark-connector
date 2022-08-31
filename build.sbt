@@ -3,6 +3,8 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider
 
 val pkgOrg = Seq("com", "microsoft", "sqlserver", "jdbc", "spark")
 val pkgName = "spark-mssql-connector"
+val s3Base: String = "s3://s3-us-east-1.amazonaws.com/aiq-artifacts"
+val sparkVersion = "2.4.7"
 
 name := "spark-mssql-connector"
 
@@ -12,7 +14,6 @@ version := "1.0.2-aiq1"
 
 scalaVersion := "2.11.12"
 crossScalaVersions := Seq("2.11.12", "2.12.15")
-val sparkVersion = "2.4.7"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 
@@ -37,8 +38,6 @@ scalacOptions := Seq("-unchecked", "-deprecation", "evicted")
 // Exclude scala-library from this fat jar. The scala library is already there in spark package.
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
 
-val s3Base: String = "s3://s3-us-east-1.amazonaws.com/aiq-artifacts"
-
 s3CredentialsProvider := { (bucket: String) =>
   new AWSCredentialsProviderChain(
     new ProfileCredentialsProvider("default"),
@@ -47,3 +46,4 @@ s3CredentialsProvider := { (bucket: String) =>
 }
 publishMavenStyle := true
 publishTo := Some("AIQ Snapshots" at s"$s3Base/app-bin/snapshots/${pkgOrg.mkString("/")}/${pkgName}/")
+sources in (Compile, doc) := Seq.empty

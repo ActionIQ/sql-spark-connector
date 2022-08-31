@@ -1,10 +1,13 @@
+import com.amazonaws.auth.{AWSCredentialsProviderChain, DefaultAWSCredentialsProviderChain}
+import com.amazonaws.auth.profile.ProfileCredentialsProvider
+
 name := "spark-mssql-connector"
 
 organization := "com.microsoft.sqlserver.jdbc.spark"
 
-version := "1.0.0"
+version := "1.0.2-aiq1"
 
-scalaVersion := "2.11.12"
+scalaVersion := "2.12.15"
 
 val sparkVersion = "2.4.6"
 
@@ -30,3 +33,15 @@ scalacOptions := Seq("-unchecked", "-deprecation", "evicted")
 
 // Exclude scala-library from this fat jar. The scala library is already there in spark package.
 assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false)
+
+s3CredentialsProvider := { (bucket: String) =>
+  new AWSCredentialsProviderChain(
+    new ProfileCredentialsProvider("default"),
+    DefaultAWSCredentialsProviderChain.getInstance()
+  )
+}
+publishMavenStyle := true
+publishTo := Some("AIQ Releases" at "s3://s3-us-east-1.amazonaws.com/aiq-artifacts/releases/")
+
+// Publish fails to create docs for some reason
+sources in (Compile, doc) := Seq.empty

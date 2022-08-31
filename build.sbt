@@ -6,7 +6,7 @@ val pkgName = "spark-mssql-connector"
 val s3Base: String = "s3://s3-us-east-1.amazonaws.com/aiq-artifacts"
 val sparkVersion = "2.4.7"
 
-name := "spark-mssql-connector"
+name := pkgName
 
 organization := pkgOrg.mkString(".")
 
@@ -46,4 +46,6 @@ s3CredentialsProvider := { (bucket: String) =>
 }
 publishMavenStyle := true
 publishTo := Some("AIQ Snapshots" at s"$s3Base/app-bin/snapshots/${pkgOrg.mkString("/")}/${pkgName}/")
+
+// Publish fails to create docs for some reason
 sources in (Compile, doc) := Seq.empty

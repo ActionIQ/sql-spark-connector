@@ -12,8 +12,7 @@ organization := pkgOrg.mkString(".")
 
 version := "1.0.2-aiq1"
 
-scalaVersion := "2.11.12"
-crossScalaVersions := Seq("2.11.12", "2.12.15")
+scalaVersion := "2.12.15"
 
 javacOptions ++= Seq("-source", "1.8", "-target", "1.8", "-Xlint")
 

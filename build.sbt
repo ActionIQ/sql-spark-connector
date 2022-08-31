@@ -41,7 +41,7 @@ s3CredentialsProvider := { (bucket: String) =>
   )
 }
 publishMavenStyle := true
-publishTo := Some("AIQ Snapshots" at "s3://s3-us-east-1.amazonaws.com/aiq-artifacts/app-bin/snapshots/")
+publishTo := Some("AIQ Releases" at "s3://s3-us-east-1.amazonaws.com/aiq-artifacts/releases/")
 
 // Publish fails to create docs for some reason
 sources in (Compile, doc) := Seq.empty

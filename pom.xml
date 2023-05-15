@@ -22,6 +22,7 @@
         <scala.binary.version>2.12</scala.binary.version>
         <scala.version>2.12.15</scala.version>
         <spark.version>3.3.2</spark.version>
+        <driver.version>10.2.0.jre17</driver.version>
     </properties>
     <dependencies>
         <dependency>
@@ -34,6 +35,11 @@
             <artifactId>spark-sql_${scala.binary.version}</artifactId>
             <version>${spark.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>${driver.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -67,11 +73,6 @@
             <artifactId>scalatest_${scala.binary.version}</artifactId>
             <version>3.2.6</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>10.2.0.jre17</version>
         </dependency>
     </dependencies>
     <developers>
